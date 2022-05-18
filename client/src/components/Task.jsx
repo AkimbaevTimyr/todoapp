@@ -3,17 +3,15 @@ import React from 'react'
 import { deleteTodo } from '../http/taskApi'
 
 
-const Task = observer(({todoItem}) => {
-    const handleClick = (id) =>{
+const Task = observer(({ todoItem }) => {
+    const handleClick = (id) => {
         deleteTodo(id)
     }
+    // onClick={ handleClick(todoItem.todoid)
     return (
         <li class="task">
-            <label for="">
-                <input  type="checkbox" onClick={ handleClick(todoItem.todoid) } />
-                    <p class="">{todoItem.text}</p>
-            </label>
-            <div>123</div>
+            <p>{todoItem.text}</p>
+            <div className='delete' onClick={()=> handleClick(todoItem.todoid)}></div>
         </li>
     )
 })

@@ -29,15 +29,6 @@ class TodoController {
             next(ApiError.badRequest(e.message))
         }
     }
-    async deleteAllTodos(req, res, next){
-        try{
-            const {id} = req.params
-            const todos = await db.query(`delete from todo where user_id = $1`, [id])
-            res.json(todos)
-        }catch(e){
-            next(ApiError.badRequest(e.message))
-        }   
-    }
 }   
 
 

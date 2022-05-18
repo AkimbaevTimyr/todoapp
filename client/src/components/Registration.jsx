@@ -8,8 +8,12 @@ const Registration = () => {
     const [password, setPassword] = useState()
     const click = async(e) =>{
         try{
-            let data;
-            data = await registration(Date.now(), email , password)
+            if(email){
+                let data;
+                data = await registration(Date.now(), email , password)
+            }else{
+                alert('Введите email или password')
+            }
         }catch(e){
             console.log(e.responce)
         }

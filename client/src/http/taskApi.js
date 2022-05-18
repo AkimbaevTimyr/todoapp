@@ -7,6 +7,7 @@ export const getTodos = async (id) =>{
 }
 
 export const addTodos = async (todo) =>{
+    console.log(todo)
     const {data} = await $host.post('api/todo', todo)
     return data
 }
@@ -16,8 +17,8 @@ export const deleteTodo = async (id) =>{
     return data
 }
 
-export const deleteAllTodo = async(id) =>{
-    const {data} = await $host.delete('api/todo/all/' + id)
-    return data
-}
+// export const deleteAllTodo = async(id) =>{
+//     const {data} = await $host.delete('api/todo/all/' + id)
+//     return data
+// }
 
