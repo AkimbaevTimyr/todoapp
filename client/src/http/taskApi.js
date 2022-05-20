@@ -7,7 +7,6 @@ export const getTodos = async (id) =>{
 }
 
 export const addTodos = async (todo) =>{
-    console.log(todo)
     const {data} = await $host.post('api/todo', todo)
     return data
 }

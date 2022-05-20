@@ -9,7 +9,7 @@ const generateJwt = (id, email, hashPassword) =>{
     return jwt.sign(
         {id, email, hashPassword},
         SECRET_KEY,
-        {expiresIn: '24h'}
+        {expiresIn: '1h'}
     )
 }
 class UserController{
@@ -34,23 +34,24 @@ class UserController{
     }
     // сделать вывод не верного пароля и тд
     async login(req, res, next){
-        try{    
+        // try{    
             const {email, password} = req.body
             const user = await db.query(`select * from person where email = $1`,[email])
+            const id = user.rows[0].id
             if(!user){
                return dialog.info('Пользователь не найден')
             }
             if(user.rows[0].password != password){
-                return alert('Не верный пароль')
+               next(ApiError.badRequest('Не верный пароль'))
             }
-            const token = generateJwt(user.id, user.email, user.password)
-            return res.json(token)
-        }catch(e){
-            next(ApiError.badRequest(e.message))
-        }
+            const token = generateJwt(user.id, user.email)
+            return res.json([token, id])
+        // }catch(e){
+        //     next(ApiError.badRequest(e.message))
+        // }
     }
     async check(req, res, next){
-        const token = generateJwt(req.user.id, req.user.email, req.user.id)
+        const token = generateJwt(req.user.id, req.user.email, req.user.password)
         return res.json(token)
     }
 }

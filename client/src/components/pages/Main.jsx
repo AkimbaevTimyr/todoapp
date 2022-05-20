@@ -5,25 +5,29 @@ import { addTodos, } from '../../http/taskApi';
 import { observer } from 'mobx-react-lite'
 import { getTodos } from '../../http/taskApi';
 import { check } from '../../http/userApi';
+
 const Main = observer(() => {
   const { user } = useContext(Context)
   const { todo } = useContext(Context)
   useEffect(() => {
     check().then(data => {
-      console.log(data)
       user.setAuth(true)
     })
   }, [])
+  
+  
   useEffect(() => {
-    getTodos(1).then(data => todo.setTodo(data))
-  }, [todo.todo])
+    getTodos(user.userId).then(data => todo.setTodo(data))
+  }, [todo])
+
+  
   const [text, setText] = useState('')
   const addTodo = () => {
     if (text) {
       const todo = {
         todoid: Date.now(),
         text,
-        user_id: 1
+        user_id: user.userId
       }
       setText('')
       addTodos(todo)
@@ -31,6 +35,7 @@ const Main = observer(() => {
       alert('Введите пожалуйста текст')
     }
   }
+
   return (
     <div >
       {user.isAuth === true ? (<div className="wrapper"> <div className="task-input">

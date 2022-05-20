@@ -12,7 +12,7 @@ const NavBar = observer (() =>{
     return(
         <div className='navBar'>
             <Link to='/main'><div>Главная</div></Link>
-            {user.isAuth === true ? ( <Link to='/login'><div onClick={()=> click(false)}>Выйти</div></Link>) :  (<Link to='/login'><div>Войти</div></Link>)}
+            {user.isAuth === true ? ( <Link to='/'><div onClick={()=> click(false)}>Выйти</div></Link>) :  (<Link to='/'><div>Войти</div></Link>)}
             <Link to='/registration'><div>Зарегистрироваться</div></Link>
         </div>
     )

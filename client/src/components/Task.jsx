@@ -7,6 +7,7 @@ const Task = observer(({ todoItem }) => {
     const handleClick = (id) => {
         deleteTodo(id)
     }
+    
     // onClick={ handleClick(todoItem.todoid)
     return (
         <li class="task">

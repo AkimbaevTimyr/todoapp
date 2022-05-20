@@ -28,7 +28,7 @@ const Registration = () => {
                 <div class="field-wrap">
                     <input placeholder="Password" value={password || ''} onChange={e=> setPassword(e.target.value)} type="password"  />
                 </div>
-                <div className='account'>Есть аккаунт? <Link to='/login'>Войдите</Link></div>
+                <div className='account'>Есть аккаунт? <Link to='/'>Войдите</Link></div>
                 <button onClick={(e)=> click(e)} class="button button-block" >Зарегистрироваться</button>
             </div>
         </div>

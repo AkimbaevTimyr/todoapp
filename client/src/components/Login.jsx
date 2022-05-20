@@ -1,10 +1,9 @@
-import React , {useContext, useState}from 'react'
+import React , {useContext, useEffect, useState}from 'react'
 import { Link} from "react-router-dom";
 import { Context } from '..';
-import { getTodos } from '../http/taskApi';
 import { login } from '../http/userApi';
 import { useNavigate } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+import { check } from '../http/userApi';
 
 const Login = () => {
     let navigate = useNavigate();
@@ -16,7 +15,7 @@ const Login = () => {
         try{
             if(email){
                 let data;
-                data = await login(email, password).then(data => console.log(data.token))
+                data = await login(email, password).then(data => user.setUserId(data))
                 user.setAuth(true)
                 user.setUser({email, password})
                 navigate('/main')
@@ -24,7 +23,7 @@ const Login = () => {
                 alert('Введите email или password')
             }
         }catch(e){
-            alert(e.responce.data.message)
+            alert(e.message)
         }
     }
     return (
