@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 
 export const registration = async(id, email, password) => {
     const {data} = await $host.post('api/user/registration', {id, email, password})
+    console.log(data)
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }

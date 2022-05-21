@@ -15,7 +15,7 @@ const Login = () => {
         try{
             if(email){
                 let data;
-                data = await login(email, password).then(data => user.setUserId(data))
+                data = await login(email, password).then(data => localStorage.setItem('id', data))
                 user.setAuth(true)
                 user.setUser({email, password})
                 navigate('/main')
@@ -23,7 +23,7 @@ const Login = () => {
                 alert('Введите email или password')
             }
         }catch(e){
-            alert(e.message)
+            alert('xui')
         }
     }
     return (

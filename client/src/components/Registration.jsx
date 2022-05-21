@@ -1,9 +1,10 @@
 import React , {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { registration } from '../http/userApi';
-
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
+    let navigate = useNavigate();
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const click = async(e) =>{
@@ -11,6 +12,7 @@ const Registration = () => {
             if(email){
                 let data;
                 data = await registration(Date.now(), email , password)
+                navigate('/')
             }else{
                 alert('Введите email или password')
             }
