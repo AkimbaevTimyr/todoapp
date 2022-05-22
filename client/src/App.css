@@ -33,6 +33,7 @@ body {
 
 .navBar {
   display: flex;
+  margin-left: 5px;
 }
 
 .navBar div {
@@ -139,7 +140,7 @@ li {
   margin-right: 5px;
   padding: 0 20px 10px 25px;
   display: block;
-  overflow-y: scroll;
+  overflow-y: auto;
   scroll-behavior: auto
 }
 
@@ -413,3 +414,7 @@ textarea {
   transform: rotate(-45deg);
 }
 
+.please{
+  text-align: center;
+  margin-top: 250px;
+}

@@ -8,26 +8,29 @@ import {
 } from "react-router-dom"
 import Main from './components/pages/Main'
 import NavBar from './components/NavBar';
-import { getTodos } from './http/taskApi';
 import { useContext, useEffect } from 'react';
 import { Context } from '.';
+import { check } from './http/userApi';
 const App = observer(() => {
-  const {user} = useContext(Context)
-  const {todo} = useContext(Context)
-  
+  const { user } = useContext(Context)
+  useEffect(() => {
+    check().then(data => {
+      user.setAuth(true)
+    })
+  }, [])
   return (
     <>
       <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path='/' element={<Auth />}/>
-      </Routes>
-      <Routes>
-        <Route path='/registration' element={<Auth />}/>
-      </Routes>
-      <Routes>
-        <Route path='/main' element={<Main />}/>
-      </Routes>
+        <NavBar />
+        <Routes>
+          <Route path='/' element={<Auth />} />
+        </Routes>
+        <Routes>
+          <Route path='/registration' element={<Auth />} />
+        </Routes>
+        <Routes>
+          <Route path='/main' element={<Main />} />
+        </Routes>
       </BrowserRouter>
     </>
   );

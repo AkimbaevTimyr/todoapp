@@ -1,16 +1,15 @@
-import React , {useContext, useEffect, useState}from 'react'
+import React , {useContext, useState}from 'react'
 import { Link} from "react-router-dom";
 import { Context } from '..';
 import { login } from '../http/userApi';
 import { useNavigate } from 'react-router-dom';
-import { check } from '../http/userApi';
 
 const Login = () => {
     let navigate = useNavigate();
     const {user} = useContext(Context)
-    const {todo} = useContext(Context)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState()
+   
     const click = async(e) =>{
         try{
             if(email){
@@ -23,7 +22,7 @@ const Login = () => {
                 alert('Введите email или password')
             }
         }catch(e){
-            alert('xui')
+            alert(e.messages)
         }
     }
     return (

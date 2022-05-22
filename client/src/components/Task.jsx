@@ -1,22 +1,30 @@
 import { observer } from 'mobx-react-lite'
-import React from 'react'
+import React, {useContext, useEffect, useState}from 'react'
+import { Context } from '..'
 import { deleteTodo } from '../http/taskApi'
+import { getTodos } from '../http/taskApi'
 
+const Task = observer(({ todoItem}) => {
+    const [bool, setBool] = useState(false)
+    const {todo} = useContext(Context)
+    const id = localStorage.getItem('id')
 
-const Task = observer(({ todoItem, setBool }) => {
-    const handleClick = (id) => {
-        setBool(false)
+    useEffect(() => {
+        getTodos(id).then(data => todo.setTodo(data))
+    }, [bool])
 
+    const handleClick =  async (id) => {
+        setBool(true)
         if (id) {
-            deleteTodo(id)
+            await deleteTodo(id)
         } else {
-            alert('Ненайден id')
+            alert('Не найден id')
         }
+        setBool(false)
     }
 
-    // onClick={ handleClick(todoItem.todoid)
     return (
-        <li class="task">
+        <li className="task">
             <p>{todoItem.text}</p>
             <div className='delete' onClick={() => handleClick(todoItem.todoid)}></div>
         </li>

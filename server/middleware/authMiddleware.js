@@ -18,8 +18,4 @@ module.exports = function (req, res, next) {
     } catch (e) {
         res.status(401).json({message: "Не авторизован"})
     }
-    // const token = req
-    // console.log(token)
-    // // next()
-
 };

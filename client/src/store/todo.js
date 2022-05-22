@@ -1,6 +1,5 @@
 import  {makeAutoObservable} from 'mobx'
 
-
 export default class TodoStore{
     constructor(){
         this._todos = [];

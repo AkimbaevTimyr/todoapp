@@ -34,7 +34,6 @@ const Registration = () => {
                 <button onClick={(e)=> click(e)} class="button button-block" >Зарегистрироваться</button>
             </div>
         </div>
-
     )
 }
 

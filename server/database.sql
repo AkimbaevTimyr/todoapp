@@ -1,14 +1,15 @@
--- FOREIGN KEY(user_id) REFERENCES person (id) ссылка с user_id идет на id , это внешний ключ
 
 -- создаем таблицу указываем параметры к id  параметры к email параметры к паролю primary key - первичный ключ
 create TABLE person(   
-    id SERIAL PRIMARY KEY, 
+    id BIGINT PRIMARY KEY,  
     email VARCHAR(255), 
     password VARCHAR(10) 
 );
+
+-- FOREIGN KEY(user_id) REFERENCES person (id) ссылка с user_id идет на id , это внешний ключ
 create TABLE todo(
-    todoid SERIAL PRIMARY KEY,
+    todoid BIGINT PRIMARY KEY, 
     text VARCHAR(255),
-    user_id INTEGER,
+    user_id BIGINT, 
     FOREIGN KEY (user_id) REFERENCES person (id)
 );
