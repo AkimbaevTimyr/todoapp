@@ -22,7 +22,7 @@ const Main = observer(() => {
       setText('')
       await addTodos(todo)
     } else {
-      console.log('Введите пожалуйста текст')
+      alert('Введите пожалуйста текст')
     }
     setBool(false)
   }
