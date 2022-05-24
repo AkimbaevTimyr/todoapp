@@ -6,7 +6,6 @@ import { Context } from '..'
 const NavBar = observer (() =>{
     const {user} = useContext(Context)
     const click = (bool) =>{
-        console.log(bool)
         user.setAuth(bool)
     }
     return(

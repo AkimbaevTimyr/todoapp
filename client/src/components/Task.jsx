@@ -18,7 +18,7 @@ const Task = observer(({ todoItem}) => {
         if (id) {
             await deleteTodo(id)
         } else {
-            alert('Не найден id')
+            console.log('Не найден id')
         }
         setBool(false)
     }

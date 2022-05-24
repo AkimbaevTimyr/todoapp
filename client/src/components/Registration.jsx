@@ -14,7 +14,7 @@ const Registration = () => {
                 data = await registration(Date.now(), email , password)
                 navigate('/')
             }else{
-                alert('Введите email или password')
+                console.log('Введите email или password')
             }
         }catch(e){
             console.log(e.responce)

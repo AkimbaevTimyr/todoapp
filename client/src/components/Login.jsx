@@ -19,10 +19,10 @@ const Login = () => {
                 user.setUser({email, password})
                 navigate('/main')
             }else{
-                alert('Введите email или password')
+                console.log('Введите email или password')
             }
         }catch(e){
-            alert(e.messages)
+            console.log(e.messages)
         }
     }
     return (
