@@ -10,8 +10,7 @@ const Login = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState()
    
-    const click = async(e) =>{
-        try{
+    const handleClick = async(e) =>{
             if(email){
                 let data;
                 data = await login(email, password).then(data => localStorage.setItem('id', data))
@@ -21,9 +20,6 @@ const Login = () => {
             }else{
                 alert('Введите email или password')
             }
-        }catch(e){
-            console.log(e.messages)
-        }
     }
     return (
         <div class="form">
@@ -36,7 +32,7 @@ const Login = () => {
                     <input type="password" onChange={(e)=> setPassword(e.target.value)} value={password} placeholder="password"/>
                 </div>
                 <div className='account'>Нет аккаунта? <Link to='/registration'>Зарегистируйтесь</Link></div>
-                <button onClick={(e)=> click(e)} class="button button-block" >Войти</button>
+                <button onClick={(e)=> handleClick(e)} class="button button-block" >Войти</button>
             </div>
         </div>
 
