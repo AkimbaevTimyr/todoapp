@@ -30,7 +30,7 @@ const Main = observer(() => {
   useEffect(() => {
     getTodos(id).then(data => todo.setTodo(data))
   }, [bool])
-
+  
   return (
     <div>
       {user.isAuth === true ? (<div className="wrapper"> <div className="task-input">
