@@ -23,13 +23,13 @@ const App = observer(() => {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path='/' element={<Auth />} />
+          <Route path='/login' element={<Auth />} />
         </Routes>
         <Routes>
           <Route path='/registration' element={<Auth />} />
         </Routes>
         <Routes>
-          <Route path='/main' element={<Main />} />
+          <Route path='/' element={<Main />} />
         </Routes>
       </BrowserRouter>
     </>

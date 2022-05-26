@@ -16,7 +16,7 @@ const Login = () => {
                 data = await login(email, password).then(data => localStorage.setItem('id', data))
                 user.setAuth(true)
                 user.setUser({email, password})
-                navigate('/main')
+                navigate('/')
             }else{
                 alert('Введите email или password')
             }
