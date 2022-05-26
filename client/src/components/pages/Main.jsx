@@ -34,12 +34,12 @@ const Main = observer(() => {
   return (
     <div>
       {user.isAuth === true ? (<div className="wrapper"> <div className="task-input">
-        <input value={text} type="text" onChange={(e) => setText(e.target.value)} placeholder="Add a new task" />
+        <input value={text || ''} type="text" onChange={(e) => setText(e.target.value)} placeholder="Add a new task" />
         <button className='add-btn' onClick={() => addTodo()}>Add</button>
       </div>
         <ul className="task-box">
-          {todo.todo.map(el => (
-            <Task  key={el.id} todoItem={el} id={el.id} />
+          {todo.todo.map((el, index) => (
+            <Task  key={index} todoItem={el} id={el.id} />
           ))}
         </ul></div>) : (<div className='please'>Пожалуйста Войдите</div>)}
     </div>

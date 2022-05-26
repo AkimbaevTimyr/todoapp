@@ -21,17 +21,17 @@ const Registration = () => {
         }
     }
     return (
-        <div class="form">
+        <div className="form">
             <div id="login">
                 <h1>Добро пожаловать!</h1>
-                <div class="field-wrap">
+                <div className="field-wrap">
                     <input placeholder="Email" value={email || ''} onChange={e => setEmail(e.target.value)}type="email" />
                 </div>
-                <div class="field-wrap">
+                <div className="field-wrap">
                     <input placeholder="Password" value={password || ''} onChange={e=> setPassword(e.target.value)} type="password"  />
                 </div>
                 <div className='account'>Есть аккаунт? <Link to='/'>Войдите</Link></div>
-                <button onClick={(e)=> click(e)} class="button button-block" >Зарегистрироваться</button>
+                <button onClick={(e)=> click(e)} className="button button-block" >Зарегистрироваться</button>
             </div>
         </div>
     )
