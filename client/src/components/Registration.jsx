@@ -12,7 +12,7 @@ const Registration = () => {
             if(email){
                 let data;
                 data = await registration(Date.now(), email , password)
-                navigate('/')
+                navigate('/login')
             }else{
                 alert('Введите email или password')
             }
