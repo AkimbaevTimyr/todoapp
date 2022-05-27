@@ -1,5 +1,5 @@
-npm run dev - запуск сервера;
-npm run - запуск клиента;
+npm run dev - запуск сервера
+npm run - запуск клиента
 Stack:
 -ReactJS
 -React Router
