@@ -10,3 +10,10 @@ app.use('/api', router) //инициализируем роуты
 
 
 app.listen(PORT, ()=> console.log('SERVER IS RUNNIG'))
+
+
+module.exports = (req, res) => {
+    const { name = 'World' } = req.query;
+    res.send(`Hello ${name}!`);
+  };
+  
