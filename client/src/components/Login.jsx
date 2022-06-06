@@ -32,7 +32,7 @@ const Login = () => {
                     <input type="password" onChange={(e)=> setPassword(e.target.value)} value={password || ''} placeholder="password"/>
                 </div>
                 <div className='account'>Нет аккаунта? <Link to='/registration'>Зарегистируйтесь</Link></div>
-                <button onClick={(e)=> handleClick(e)} className="button button-block" >Войти</button>
+                <button onClick={(e)=> handleClick(e)} className="button button-block">Войти</button>
             </div>
         </div>
 

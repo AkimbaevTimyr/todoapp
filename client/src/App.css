@@ -280,6 +280,15 @@ li {
   .task label input {
     margin-top: 4px;
   }
+  .form .button{
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 490px) {
+  .form .button{
+    font-size: 25px;
+  }
 }
 
 
