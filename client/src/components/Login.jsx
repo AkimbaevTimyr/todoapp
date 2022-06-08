@@ -10,8 +10,6 @@ const Login = () => {
     const password = useInput('', {isEmpty: true, minLength: 1 ,maxLength: 10});
     const email = useInput('', {isEmpty: true, minLength: 5, isEmail: true, maxLength: 10});
 
-
-
     const handleClick = async(e) =>{
             if(email){
                 let data;
