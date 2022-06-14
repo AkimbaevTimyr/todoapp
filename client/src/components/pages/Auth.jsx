@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
 import Login from '../Login'
 import Registration from '../Registration'
