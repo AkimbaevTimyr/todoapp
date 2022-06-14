@@ -34,6 +34,7 @@ body {
 .navBar {
   display: flex;
   margin-left: 5px;
+  margin-top: 5px;
 }
 
 .navBar div {
