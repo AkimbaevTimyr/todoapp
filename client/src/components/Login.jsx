@@ -8,7 +8,7 @@ const Login = () => {
     let navigate = useNavigate();
     const {user} = useContext(Context)
     const password = useInput('', {isEmpty: true, minLength: 1 ,maxLength: 10});
-    const email = useInput('', {isEmpty: true, minLength: 5, isEmail: true, maxLength: 10});
+    const email = useInput('', {isEmpty: true, minLength: 5, isEmail: true, maxLength: 100});
 
     const handleClick = async(e) =>{
             if(email){
@@ -21,7 +21,6 @@ const Login = () => {
                 alert('Введите email или password')
             }
     }
-    
     return (
         <div className="form">
             <div id="login">
@@ -39,7 +38,7 @@ const Login = () => {
                     <input type="password" onChange={(e)=> password.onChange(e)} onBlur={e=> password.onBlur(e)} value={password.value || ''} placeholder="password"/>
                 </div>
                 <div className='account'>Нет аккаунта? <Link to='/registration'>Зарегистируйтесь</Link></div>
-                <button onClick={(e)=> handleClick(e)} className="button button-block">Войти</button>
+                <button type="button" onClick={(e)=> handleClick(e)} disabled={!email.buttonValid || !password.buttonValid}  class="btn b btn-primary">Войти</button>
             </div>
         </div>
 

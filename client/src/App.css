@@ -393,8 +393,17 @@ textarea {
 .button-block {
   display: block;
   width: 100%;
+  background-color: #2D5CFE;
+  border-radius: 100px;
+  color: white;
 }
 
+
+.b{
+  width: auto;
+  display: block;
+  margin: 0 auto;
+}
 
 .account {
   font-size: 18px;
