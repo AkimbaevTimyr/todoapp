@@ -11,7 +11,8 @@ const Main = observer(() => {
   const id = localStorage.getItem('id')
   const [text, setText] = useState('')
   const [bool, setBool] = useState(false)
-  const addTodo = async () => {
+  const addTodo = async (e) => {
+    e.preventDefault()
     setBool(true)
     if (text) {
       const todo = {
@@ -30,16 +31,19 @@ const Main = observer(() => {
   useEffect(() => {
     getTodos(id).then(data => todo.setTodo(data))
   }, [bool])
-  
+
   return (
     <div>
-      {user.isAuth === true ? (<div className="wrapper"> <div className="task-input">
-        <input value={text || ''} type="text" onChange={(e) => setText(e.target.value)} placeholder="Add a new task" />
-        <button className='add-btn' onClick={() => addTodo()}>Add</button>
-      </div>
+      {user.isAuth === true ? (<div className="wrapper">
+        <form onSubmit={(e)=> addTodo(e) }>
+          <div className="task-input">
+            <input value={text || ''} type="text" onChange={(e) => setText(e.target.value)} placeholder="Add a new task" />
+            <button type='submit' className='add-btn'>Add</button>
+          </div>
+      </form>
         <ul className="task-box">
           {todo.todo.map((el, index) => (
-            <Task  key={index} todoItem={el} id={el.id} />
+            <Task key={index} todoItem={el} id={el.id} />
           ))}
         </ul></div>) : (<div className='please'>Пожалуйста Войдите</div>)}
     </div>
