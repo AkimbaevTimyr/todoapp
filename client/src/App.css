@@ -55,7 +55,7 @@ body {
 .task-input button {
   width: 70px;
   background: #1f2937;
-  border: 1px solid #4AB1FF;
+  border: 1px solid #1f2937;
   margin-left: 5px;
   cursor: pointer;
   border-radius: 5px;
@@ -84,7 +84,7 @@ body {
 .task-input input:focus,
 .task-input input.active {
   padding-left: 5px;
-  border: 2px solid #3C87FF;
+  border: 2px solid #1f2937;
 }
 
 .task-input input::placeholder {
