@@ -8,11 +8,9 @@ const Task = observer(({ todoItem}) => {
     const [bool, setBool] = useState(false)
     const {todo} = useContext(Context)
     const id = localStorage.getItem('id')
-
     useEffect(() => {
         getTodos(id).then(data => todo.setTodo(data))
     }, [bool])
-
     const handleClick =  async (id) => {
         setBool(true)
         if (id) {
@@ -22,7 +20,6 @@ const Task = observer(({ todoItem}) => {
         }
         setBool(false)
     }
-
     return (
         <li className="task">
             <p>{todoItem.text}</p>

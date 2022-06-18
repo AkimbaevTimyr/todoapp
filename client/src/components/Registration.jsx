@@ -4,10 +4,13 @@ import { registration } from '../http/userApi';
 import { useNavigate } from 'react-router-dom';
 import { useInput } from './validation/useInput';
 import { LockClosedIcon } from '@heroicons/react/solid'
+import { useState } from 'react';
+import Error from './errors/Error';
 const Registration = () => {
     const password = useInput('', { isEmpty: true, minLength: 1, maxLength: 10 });
     const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
     let navigate = useNavigate();
+    const [error, setError] = useState(false)
     const click = async (e) => {
         try {
             let data;
@@ -15,10 +18,13 @@ const Registration = () => {
             navigate('/login')
         } catch (e) {
             console.log(e.responce)
+            setError(true)
         }
     }
     return (
-        <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <>
+         {error === false ? "" : <Error error={"Произошла не предвиденная ошибка попробуйте еще раз"} click={() => setError(false)} />}
+         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mt-3">
             <div className="max-w-md w-full space-y-8">
                 <div>
                     <img
@@ -89,6 +95,7 @@ const Registration = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

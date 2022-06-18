@@ -4,7 +4,7 @@ import {  Link } from 'react-router-dom'
 import { Context } from '..'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const NavBar = observer (() =>{
     const {user} = useContext(Context)
@@ -12,18 +12,10 @@ const NavBar = observer (() =>{
         user.setAuth(bool)
     }
     const navigation = [{ name: 'Главная', href: '/', current: true },]
-      
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
-      console.log(user.isAuth)
-      
     return(
-        // <div className='navBar'>
-        //     <Link to='/'><div>Главная</div></Link>
-        //     {user.isAuth === true ? ( <Link to='/login'><div onClick={()=> click(false)}>Выйти</div></Link>) :  (<Link to='/login'><div>Войти</div></Link>)}
-        //     <Link to='/registration'><div>Зарегистрироваться</div></Link>
-        // </div>
         <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
           <>
@@ -122,7 +114,6 @@ const NavBar = observer (() =>{
                 </div>
               </div>
             </div>
-  
             <Disclosure.Panel className="sm:hidden">
               <div className="px-2 pt-2 pb-3 space-y-1">
                 {navigation.map((item) => (
