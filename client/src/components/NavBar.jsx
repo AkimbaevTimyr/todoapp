@@ -15,6 +15,7 @@ const NavBar = observer (() =>{
       function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
       }
+      console.log(user.isAuth)
     return(
         <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
@@ -78,9 +79,10 @@ const NavBar = observer (() =>{
                           {({ active }) => (
                              <Link to="/login">
                             <p
+                              onClick={()=> click(false)}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                             >
-                              Войти
+                              Выйти
                             </p>
                             </Link>
                           )}
@@ -89,10 +91,9 @@ const NavBar = observer (() =>{
                             {({ active }) => (
                               <Link to="/login">
                               <p
-                                onClick={()=> click(false)}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
-                               Выйти
+                               Войти
                               </p>
                               </Link>
                             )}

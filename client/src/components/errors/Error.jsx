@@ -1,6 +1,7 @@
 import React from "react";
 
 const Error = ({click, error}) => {
+    console.log(error)
     return (
         <div
             className="flex items-center justify-between p-4 border rounded text-sky-700 bg-sky-50 border-sky-900/10 w-1/3 m-auto mt-3"

@@ -5,7 +5,7 @@ const $host = axios.create({
 })
 const authInterceptor = config => {
     const token = localStorage.getItem('token')
-    config.headers.authorization = `Bearer ${token}`
+    config.headers.authorization = token != "Не верный пароль" ? `Bearer ${token}` : ''
     return config
 }
 $host.interceptors.request.use(authInterceptor)
