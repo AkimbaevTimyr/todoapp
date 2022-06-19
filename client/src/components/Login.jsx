@@ -14,20 +14,29 @@ const Login = () => {
     const password = useInput('', { isEmpty: true, minLength: 1, maxLength: 10 });
     const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true, maxLength: 100 });
     const [error, setError] = useState(false)
+    const [errorMessage, setErrorMessage] = useState('')
     const handleClick = async (e) => {
         try {
             let data;
-            data = await login(email.value, password.value).then(data => localStorage.setItem('id', data))
-            user.setAuth(true)
-            user.setUser({ email: email.value, password: password.value })
-            navigate('/')
+            data = await login(email.value, password.value)
+            if (data[0] === 'Не верный пароль') {
+                setError(true)
+                setErrorMessage('Не верный пароль')
+            } else {
+                localStorage.setItem('token', data[0])
+                localStorage.setItem('id', data[1])
+                user.setAuth(true)
+                user.setUser({ email: email.value, password: password.value })
+                navigate('/')
+            }
         } catch (error) {
+            console.log(error)
             setError(true)
         }
     }
     return (
         <>
-            {error === false ? "" : <Error error={"Не верный логин или пароль"} click={() => setError(false)} />}
+            {error === false ? "" : <Error error={errorMessage} click={() => setError(false)} />}
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8">
                     <div>
@@ -39,9 +48,11 @@ const Login = () => {
                         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Войди если есть аккаунт</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                             или{' '}
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                <Link to='/registration'>Зарегийстрируй новый</Link>
-                            </a>
+                            <Link to='/registration'>
+                                <p href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                    Зарегийстрируй новый
+                                </p>
+                            </Link>
                         </p>
                     </div>
                     <form className="mt-8 space-y-6" action="#" method="POST">

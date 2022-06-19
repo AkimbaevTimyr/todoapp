@@ -77,35 +77,36 @@ const NavBar = observer (() =>{
                         <Menu.Item>
                           {({ active }) => (
                              <Link to="/login">
-                            <a
+                            <p
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                              onClick={()=> click(false)}
                             >
-                              Выйти
-                            </a>
+                              Войти
+                            </p>
                             </Link>
                           )}
                         </Menu.Item>) : ( 
                             <Menu.Item>
                             {({ active }) => (
                               <Link to="/login">
-                              <a
+                              <p
+                                onClick={()=> click(false)}
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >
-                               Войти
-                              </a>
+                               Выйти
+                              </p>
                               </Link>
                             )}
                           </Menu.Item>
                         )}
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="/registration"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                            >
-                              Зарегистрироваться
-                            </a>
+                            <Link to="/registration">
+                              <p
+                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              >
+                                Зарегистрироваться
+                              </p>
+                            </Link>
                           )}
                         </Menu.Item>
                       </Menu.Items>
