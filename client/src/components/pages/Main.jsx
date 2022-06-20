@@ -4,6 +4,7 @@ import Task from '../Task'
 import { addTodos, } from '../../http/taskApi';
 import { observer } from 'mobx-react-lite'
 import { getTodos } from '../../http/taskApi';
+import Login from '../Login';
 
 const Main = observer(() => {
   const { todo } = useContext(Context)
@@ -45,7 +46,7 @@ const Main = observer(() => {
           {todo.todo.map((el, index) => (
             <Task key={index} todoItem={el} id={el.id} />
           ))}
-        </ul></div>) : (<div className='please'>Пожалуйста Войдите</div>)}
+        </ul></div>) : (<Login />)}
     </div>
   )
 })

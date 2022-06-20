@@ -38,8 +38,6 @@ const NavBar = observer (() =>{
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
                         <a
-                          key={item.name}
-                          href={item.href}
                           className={classNames(
                             item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                             'px-3 py-2 rounded-md text-sm font-medium'
@@ -77,7 +75,7 @@ const NavBar = observer (() =>{
                         {user.isAuth === true ? ( 
                         <Menu.Item>
                           {({ active }) => (
-                             <Link to="/login">
+                             <Link to="/">
                             <p
                               onClick={()=> click(false)}
                               className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
@@ -89,7 +87,7 @@ const NavBar = observer (() =>{
                         </Menu.Item>) : ( 
                             <Menu.Item>
                             {({ active }) => (
-                              <Link to="/login">
+                              <Link to="/">
                               <p
                                 className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                               >

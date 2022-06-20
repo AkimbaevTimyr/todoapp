@@ -15,7 +15,7 @@ const Registration = () => {
         try {
             let data;
             data = await registration(Date.now(), email.value, password.value)
-            navigate('/login')
+            navigate('/')
         } catch (e) {
             console.log(e)
             setError(true)
@@ -32,11 +32,11 @@ const Registration = () => {
                             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Имеется аккаунт ?</h2>
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Зарегистрируйся</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            <Link to='/login'>
+                            <Link to='/'>
                                 <p className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Тогда войди в него
+                                    или войди в аккаунт
                                 </p>
                             </Link>
                         </p>

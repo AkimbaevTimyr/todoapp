@@ -5,7 +5,7 @@ import Registration from '../Registration'
 
 const Auth = () =>{
     const location = useLocation()
-    const isLogin  = location.pathname === '/login'
+    const isLogin  = location.pathname === '/'
     return(
         <div>
             {isLogin === true ? <Login isLogin={isLogin} /> : <Registration isLogin={isLogin}/>}

@@ -27,7 +27,7 @@ const Login = () => {
                 localStorage.setItem('id', data[1])
                 user.setAuth(true)
                 user.setUser({ email: email.value, password: password.value })
-                navigate('/')
+                navigate('/main')
             }
         } catch (error) {
             console.log(error)
@@ -45,12 +45,12 @@ const Login = () => {
                             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Войди если есть аккаунт</h2>
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Войти в аккаунт</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
                             или{' '}
                             <Link to='/registration'>
                                 <p href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Зарегийстрируй новый
+                                   Зарегистрироваться
                                 </p>
                             </Link>
                         </p>
