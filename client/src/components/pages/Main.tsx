@@ -1,18 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Context } from '../..'
+import { useContext, useEffect, useState, FC } from 'react'
 import Task from '../Task'
 import { addTodos, } from '../../http/taskApi';
-import { observer } from 'mobx-react-lite'
 import { getTodos } from '../../http/taskApi';
 import Login from '../Login';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { setTodo } from '../../store1/reducers/TodoActionCreator';
 
-const Main = observer(() => {
-  const { todo } = useContext(Context)
-  const { user } = useContext(Context)
+const Main: FC = () => {
+  const {todos} = useAppSelector(state => state.todos)
+  const dispatch = useAppDispatch()
+  const {isAuth} = useAppSelector(state => state.users)
   const id = localStorage.getItem('id')
   const [text, setText] = useState('')
   const [bool, setBool] = useState(false)
-  const addTodo = async (e) => {
+  const addTodo = async (e: any) => {
     e.preventDefault()
     setBool(true)
     if (text) {
@@ -28,27 +29,27 @@ const Main = observer(() => {
     }
     setBool(false)
   }
-
   useEffect(() => {
-    getTodos(id).then(data => todo.setTodo(data))
+    getTodos(id).then(data => dispatch(setTodo(data)))
   }, [bool])
-
   return (
     <div>
-      {user.isAuth === true ? (<div className="wrapper">
+      {isAuth === true ? (<div className="wrapper">
         <form onSubmit={(e)=> addTodo(e) }>
           <div className="task-input">
             <input value={text || ''} type="text" onChange={(e) => setText(e.target.value)} placeholder="Add a new task" />
             <button type='submit' className='add-btn'>Add</button>
           </div>
       </form>
-        <ul className="task-box">
-          {todo.todo.map((el, index) => (
-            <Task key={index} todoItem={el} id={el.id} />
+      <ul className="task-box">
+          {todos.map((el: any, index: any) => (
+            <Task key={index} todoItem={el}  />
           ))}
         </ul></div>) : (<Login />)}
     </div>
   )
-})
+}
 
-export default Main
+export default Main;
+
+

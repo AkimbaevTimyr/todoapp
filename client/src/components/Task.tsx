@@ -1,17 +1,24 @@
 import { observer } from 'mobx-react-lite'
-import React, {useContext, useEffect, useState}from 'react'
-import { Context } from '..'
+import React, {useContext, useEffect, useState, FC}from 'react'
+import { useAppDispatch } from '../hooks/redux'
 import { deleteTodo } from '../http/taskApi'
 import { getTodos } from '../http/taskApi'
+import { setTodo } from '../store1/reducers/TodoActionCreator'
 
-const Task = observer(({ todoItem}) => {
+
+interface TaskProps {
+    todoItem: any,
+
+}
+
+const Task: FC<TaskProps> = ({todoItem}) => {
+    const dispatch = useAppDispatch()
     const [bool, setBool] = useState(false)
-    const {todo} = useContext(Context)
     const id = localStorage.getItem('id')
     useEffect(() => {
-        getTodos(id).then(data => todo.setTodo(data))
+        getTodos(id).then(data =>dispatch(setTodo(data)))
     }, [bool])
-    const handleClick =  async (id) => {
+    const handleClick =  async (id: number) => {
         setBool(true)
         if (id) {
             await deleteTodo(id)
@@ -26,6 +33,6 @@ const Task = observer(({ todoItem}) => {
             <div className='delete' onClick={() => handleClick(todoItem.todoid)}></div>
         </li>
     )
-})
+}
 
 export default Task

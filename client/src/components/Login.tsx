@@ -1,30 +1,45 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { registration } from '../http/userApi';
+import React, { useContext,FC } from 'react'
+import { Link } from "react-router-dom";
+import { login } from '../http/userApi';
 import { useNavigate } from 'react-router-dom';
 import { useInput } from './validation/useInput';
 import { LockClosedIcon } from '@heroicons/react/solid'
-import { useState } from 'react';
 import Error from './errors/Error';
-const Registration = () => {
-    const password = useInput('', { isEmpty: true, minLength: 1, maxLength: 10 });
-    const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true });
+import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { setAuth, setUser } from '../store1/reducers/UserActionCreator';
+
+const Login: FC = () => {
+    const dispatch = useAppDispatch()
+    const {isAuth} = useAppSelector(state=> state.users)
     let navigate = useNavigate();
-    const [error, setError] = useState(false)
-    const click = async (e) => {
+    const password = useInput('', { isEmpty: true, minLength: 1, maxLength: 10 });
+    const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true, maxLength: 100 });
+    const [error, setError] = useState<boolean>(false)
+    const [errorMessage, setErrorMessage] = useState<string>('')
+    const handleClick = async () => {
         try {
             let data;
-            data = await registration(Date.now(), email.value, password.value)
-            navigate('/')
-        } catch (e) {
-            console.log(e)
+            data = await login(email.value, password.value)
+            if (data[0] === 'Не верный пароль') {
+                setError(true)
+                setErrorMessage('Не верный пароль')
+            } else {
+                localStorage.setItem('token', data[0])
+                localStorage.setItem('id', data[1])
+                dispatch(setAuth(true))
+                // dispatch(setUser({ email: email.value, password: password.value }))
+                navigate('/main')
+            }
+        } catch (error) {
+            console.log(error)
             setError(true)
         }
     }
     return (
         <>
-            {error === false ? "" : <Error error={"Произошла не предвиденная ошибка попробуйте еще раз"} click={() => setError(false)} />}
-            <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mt-3">
+            {error === false ? "" : <Error error={`${errorMessage}`} click={() => setError(false)} />}
+            <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8">
                     <div>
                         <img
@@ -32,11 +47,12 @@ const Registration = () => {
                             src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                             alt="Workflow"
                         />
-                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Зарегистрируйся</h2>
+                        <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Войти в аккаунт</h2>
                         <p className="mt-2 text-center text-sm text-gray-600">
-                            <Link to='/'>
+                            или{' '}
+                            <Link to='/registration'>
                                 <p className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    или войди в аккаунт
+                                   Зарегистрироваться
                                 </p>
                             </Link>
                         </p>
@@ -59,7 +75,7 @@ const Registration = () => {
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Email address"
-                                    value={email.value || ''} onChange={(e) => email.onChange(e)} onBlur={e => email.onBlur(e)}
+                                    onChange={(e) => email.onChange(e)} onBlur={e => email.onBlur()} value={email.value || ''}
                                 />
                             </div>
                             <br />
@@ -73,34 +89,31 @@ const Registration = () => {
                                 <input
                                     id="password"
                                     name="password"
-                                    type="password"
                                     autoComplete="current-password"
                                     required
                                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                     placeholder="Password"
-                                    value={password.value || ''} onChange={(e) => password.onChange(e)} onBlur={e => password.onBlur(e)}
+                                    type="password" onChange={(e) => password.onChange(e)} onBlur={e => password.onBlur()} value={password.value || ''}
                                 />
                             </div>
                         </div>
                         <div>
                             <button
-                                type="button"
-                                onClick={(e) => click(e)} disabled={!email.buttonValid || !password.buttonValid}
+                                type="button" onClick={(e) => handleClick()} disabled={!email.buttonValid || !password.buttonValid}
                                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                             >
                                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                                     <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                                 </span>
-                                Зарегистрироваться
+                                Войти
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
         </>
+
     )
 }
 
-export default Registration
-
-
+export default Login

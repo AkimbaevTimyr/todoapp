@@ -1,21 +1,21 @@
-import { observer } from 'mobx-react-lite'
-import React, { useContext } from 'react'
+import React, { FC } from 'react'
 import {  Link } from 'react-router-dom'
-import { Context } from '..'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
+import { setAuth } from '../store1/reducers/UserActionCreator'
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
 
-const NavBar = observer (() =>{
-    const {user} = useContext(Context)
-    const click = (bool) =>{
-        user.setAuth(bool)
+const NavBar: FC =() =>{
+    const dispatch = useAppDispatch()
+    const {isAuth} = useAppSelector(state => state.users);
+    const click = (bool: boolean) =>{
+        dispatch(setAuth(bool))
     }
     const navigation = [{ name: 'Главная', href: '/', current: true },]
-      function classNames(...classes) {
+      function classNames(...classes : any[]) {
         return classes.filter(Boolean).join(' ')
       }
-      console.log(user.isAuth)
     return(
         <Disclosure as="nav" className="bg-gray-800">
         {({ open }) => (
@@ -33,7 +33,6 @@ const NavBar = observer (() =>{
                   </Disclosure.Button>
                 </div>
                 <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                  
                   <div className="hidden sm:block sm:ml-6">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
@@ -72,7 +71,7 @@ const NavBar = observer (() =>{
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {user.isAuth === true ? ( 
+                        {isAuth === true ? ( 
                         <Menu.Item>
                           {({ active }) => (
                              <Link to="/">
@@ -136,6 +135,6 @@ const NavBar = observer (() =>{
         )}
       </Disclosure>
     )
-})
+}
 
 export default NavBar

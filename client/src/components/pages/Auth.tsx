@@ -8,7 +8,7 @@ const Auth = () =>{
     const isLogin  = location.pathname === '/'
     return(
         <div>
-            {isLogin === true ? <Login isLogin={isLogin} /> : <Registration isLogin={isLogin}/>}
+            {isLogin === true ? <Login/> : <Registration/>}
         </div>
     )
 }

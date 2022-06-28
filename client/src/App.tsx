@@ -1,26 +1,23 @@
 import './App.css';
-import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import Auth from './components/pages/Auth';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom"
-import Main from './components/pages/Main'
+import Main from './components/pages/Main';
 import NavBar from './components/NavBar';
-import { useContext, useEffect } from 'react';
-import { Context } from '.';
+import { setAuth } from './store1/reducers/UserActionCreator';
 import { check } from './http/userApi';
-const App = observer(() => {
-  const { user } = useContext(Context)
+const App = () => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
     check().then(data => {
-      user.setAuth(true)
+      dispatch(setAuth(true))
     })
   }, [])
+ 
   return (
     <>
-      <BrowserRouter>
+       <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path='/' element={<Auth />} />
@@ -30,10 +27,13 @@ const App = observer(() => {
         </Routes>
         <Routes>
           <Route path='/main' element={<Main />} />
-        </Routes>
+        </Routes> 
       </BrowserRouter>
     </>
   );
-})
+}
 
 export default App;
+
+
+ // 
