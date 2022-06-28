@@ -1,11 +1,11 @@
 import './App.css';
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from './hooks/redux';
+import { useAppDispatch} from './hooks/redux';
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import Auth from './components/pages/Auth';
 import Main from './components/pages/Main';
 import NavBar from './components/NavBar';
-import { setAuth } from './store1/reducers/UserActionCreator';
+import { setAuth } from './store/reducers/UserActionCreator';
 import { check } from './http/userApi';
 const App = () => {
   const dispatch = useAppDispatch();

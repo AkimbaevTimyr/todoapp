@@ -1,6 +1,9 @@
-import React from "react";
-
-const Error = ({click, error}) => {
+import {FC} from 'react'
+interface ErrorProps{
+    click: React.MouseEventHandler<HTMLButtonElement>;
+    error: string;
+}
+const Error: FC<ErrorProps> = ({click, error}) => {
     console.log(error)
     return (
         <div

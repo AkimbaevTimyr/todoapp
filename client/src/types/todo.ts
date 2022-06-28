@@ -3,7 +3,7 @@ export interface ITodo{
 }
 
 export type ITodoItem = {
-    todoId: Date;
+    todoid: Date;
     text: string;
     user_id: number;
 }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
-export const useValidation = (value, validations) => {
-    const [isEmpty, setIsEmpty] = useState(true)
-    const [minLengthError, setMinLengthError] = useState(false)
-    const [maxLengthError, setMaxLengthError] = useState(false)
-    const [emailError, setEmailError] = useState(false)
-    const [buttonValid, setButtonValid] = useState(true)
+export const useValidation = (value: string, validations: any) => {
+    const [isEmpty, setIsEmpty] = useState<boolean>(true)
+    const [minLengthError, setMinLengthError] = useState<boolean>(false)
+    const [maxLengthError, setMaxLengthError] = useState<boolean>(false)
+    const [emailError, setEmailError] = useState<boolean>(false)
+    const [buttonValid, setButtonValid] = useState<boolean>(true)
     useEffect(() => {
         for (const validation in validations) {
             switch (validation) {

@@ -1,10 +1,10 @@
 import { useState } from "react"
 import { useValidation } from "./useValidation"
-export const useInput = (initialValue, validations) => {
+export const useInput = (initialValue: string, validations: {}) => {
     const [value, setValue] = useState(initialValue)
     const valid = useValidation(value, validations)
-    const [isDirty, setIsDirty] = useState(false)
-    const onChange = (e) => {
+    const [isDirty, setIsDirty] = useState<boolean>(false)
+    const onChange = (e: any) => {
         setValue(e.target.value)
     }
     const onBlur = () => {

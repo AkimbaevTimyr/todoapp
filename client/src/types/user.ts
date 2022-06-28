@@ -1,10 +1,10 @@
 export interface IUser{
     isAuth: boolean;
-    user: IUserItem;
     userId: number;
 }
 
-export type IUserItem = {
+export interface IUserRegistration {
+    id: number;
     email: string;
-    password: string
+    password: string;
 }

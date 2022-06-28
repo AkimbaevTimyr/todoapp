@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IUser } from "../../types/user";
 
 
 export const setAuth = createAsyncThunk(
@@ -8,17 +7,6 @@ export const setAuth = createAsyncThunk(
         try{
             return bool
         }catch(e){
-        }
-    }
-)
-
-export const setUser = createAsyncThunk(
-    "user/setUser",
-    async(user: IUser, thunkAPI) =>{
-        try{
-            return user
-        }catch(e){
-
         }
     }
 )

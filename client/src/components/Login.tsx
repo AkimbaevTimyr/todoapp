@@ -7,28 +7,24 @@ import { LockClosedIcon } from '@heroicons/react/solid'
 import Error from './errors/Error';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { setAuth, setUser } from '../store1/reducers/UserActionCreator';
+import { setAuth } from '../store/reducers/UserActionCreator';
 
 const Login: FC = () => {
     const dispatch = useAppDispatch()
-    const {isAuth} = useAppSelector(state=> state.users)
     let navigate = useNavigate();
     const password = useInput('', { isEmpty: true, minLength: 1, maxLength: 10 });
     const email = useInput('', { isEmpty: true, minLength: 5, isEmail: true, maxLength: 100 });
     const [error, setError] = useState<boolean>(false)
-    const [errorMessage, setErrorMessage] = useState<string>('')
     const handleClick = async () => {
         try {
             let data;
             data = await login(email.value, password.value)
             if (data[0] === 'Не верный пароль') {
                 setError(true)
-                setErrorMessage('Не верный пароль')
             } else {
                 localStorage.setItem('token', data[0])
                 localStorage.setItem('id', data[1])
                 dispatch(setAuth(true))
-                // dispatch(setUser({ email: email.value, password: password.value }))
                 navigate('/main')
             }
         } catch (error) {
@@ -38,7 +34,7 @@ const Login: FC = () => {
     }
     return (
         <>
-            {error === false ? "" : <Error error={`${errorMessage}`} click={() => setError(false)} />}
+            {error === false ? "" : <Error error={"Не верный логин или пароль"} click={() => setError(false)} />}
             <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-md w-full space-y-8">
                     <div>

@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState, FC } from 'react'
+import {  useEffect, useState, FC } from 'react'
 import Task from '../Task'
 import { addTodos, } from '../../http/taskApi';
 import { getTodos } from '../../http/taskApi';
 import Login from '../Login';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { setTodo } from '../../store1/reducers/TodoActionCreator';
-
+import { setTodo } from '../../store/reducers/TodoActionCreator';
+import { ITodoItem } from '../../types/todo';
 const Main: FC = () => {
   const {todos} = useAppSelector(state => state.todos)
   const dispatch = useAppDispatch()
@@ -30,7 +30,7 @@ const Main: FC = () => {
     setBool(false)
   }
   useEffect(() => {
-    getTodos(id).then(data => dispatch(setTodo(data)))
+    getTodos(id).then((data: ITodoItem) => dispatch(setTodo(data)))
   }, [bool])
   return (
     <div>
@@ -42,8 +42,8 @@ const Main: FC = () => {
           </div>
       </form>
       <ul className="task-box">
-          {todos.map((el: any, index: any) => (
-            <Task key={index} todoItem={el}  />
+          {todos.map((el: any) => (
+            <Task key={el.todoId} todoItem={el}  />
           ))}
         </ul></div>) : (<Login />)}
     </div>

@@ -3,7 +3,7 @@ import {  Link } from 'react-router-dom'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { setAuth } from '../store1/reducers/UserActionCreator'
+import { setAuth } from '../store/reducers/UserActionCreator'
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 
 const NavBar: FC =() =>{
